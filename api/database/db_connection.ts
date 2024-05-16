@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const connectToDatabase = async () : Promise<void> => {
-    const mongoDbUrl: string | undefined = process.env.MONGODB_URL;
+    const mongoDbUrl : string | undefined = process.env.MONGODB_URL;
 
     if (!mongoDbUrl) {
         console.error("No MongoDB url provided.");
