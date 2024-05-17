@@ -1,10 +1,20 @@
 import { connectToDatabase } from "./config/db_connection";
 import express, { Application } from 'express';
-import dotenv from 'dotenv'; 
 require('dotenv').config();
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import compression from 'compression';
+import cors from 'cors';
 
 const app: Application = express();
 
+app.use(cors({
+    credentials: true,
+}));
+
+app.use(compression());
+app.use(cookieParser());
+app.use(bodyParser.json());
 
 const listenForRequests = (): void => {
     const port : string | undefined = process.env.PORT;
