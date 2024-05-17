@@ -10,9 +10,9 @@ interface IUser {
 };
 
 const userSchema = new Schema<IUser>({
-    username: {required: true},
-    email: {required: true },
-    password: { required: true },
+    username: {type: String, required: true},
+    email: {type: String, required: true },
+    password: { type: String, required: true },
     quiz : quizEntrySchema,
 });
 

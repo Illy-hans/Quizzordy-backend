@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv'; 
+require('dotenv').config();
 
 const connectToDatabase = async () : Promise<void> => {
-    const mongoDbUrl : string | undefined = process.env.MONGODB_URL;
+    const mongoDbUrl: string = process.env.MONGODB_URL;
 
     if (!mongoDbUrl) {
         console.error("No MongoDB url provided.");
@@ -10,10 +12,8 @@ const connectToDatabase = async () : Promise<void> => {
 
     try { 
     await mongoose.connect(mongoDbUrl);
-
-    if (process.env.NODE_ENV) {
-        console.log("Successfully connected to MongoDB");
-        }
+    console.log("Successfully connected to MongoDB");
+        
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
         throw error;

@@ -1,15 +1,15 @@
 import { ObjectId, Schema } from 'mongoose';
 
 interface QuizEntry {
-    score: number;
+    score: Number;
     array: ObjectId[];
     createdAt: Date;
 }
 
 const quizEntrySchema = new Schema<QuizEntry>({
-    score: { required: true },
+    score: { type: Number, required: true },
     array: [{ type: Schema.Types.ObjectId, ref: "Question" }],
-    createdAt: { default : Date.now, required: true }
+    createdAt: { type: Date, default : Date.now, required: true }
 });
 
 

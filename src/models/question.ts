@@ -8,10 +8,10 @@ interface Question {
 };
 
 const questionSchema = new Schema<Question>({
-    question: {required: true},
-    category: {required: true},
-    correct_answer: {required: true},
-    incorrect_answers: {required: true},
+    question: {type: String, required: true},
+    category: {type: String, required: true},
+    correct_answer: {type: String, required: true},
+    incorrect_answers: {type: [String], required: true},
 }, { _id: true } );
 
 const Question = model<Question>('Question', questionSchema)
