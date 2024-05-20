@@ -1,5 +1,5 @@
 import { expect, it, beforeAll, afterAll } from '@jest/globals';
-import { Question } from '../../models/question';
+import { Question } from '../../models/questionModel';
 import mongoose from 'mongoose';
 import { connectToDatabase } from '../../config/db_connection';
 
