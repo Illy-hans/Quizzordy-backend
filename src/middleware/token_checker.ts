@@ -15,7 +15,6 @@ interface CustomRequest extends Request {
     user_id?: string; 
 };
 
-
 const tokenChecker = (req: CustomRequest, res: Response, next: NextFunction) => {
     let token: string | undefined;
 
