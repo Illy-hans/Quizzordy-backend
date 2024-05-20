@@ -1,4 +1,4 @@
-### Quizzordy: A Typescript & Node quiz app back-end
+### Quizzordy: A Typescript & Node quiz app api
 
 Tech Stack
 - Typescript 
