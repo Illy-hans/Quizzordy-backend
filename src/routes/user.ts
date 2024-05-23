@@ -8,4 +8,4 @@ router.post("/", UsersController.create);
 router.get("/", tokenChecker, UsersController.getAllUserInfo);
 router.patch("/",tokenChecker, UsersController.updateUserInfo);
 
-export { router };
+export { router as usersRouter };

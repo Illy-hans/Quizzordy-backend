@@ -26,4 +26,4 @@ userSchema.pre('save', async function (next) {
 
 const User = model<IUser>('User', userSchema)
 
-export { User }; 
+export { User, IUser }; 
