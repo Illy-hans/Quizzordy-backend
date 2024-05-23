@@ -5,9 +5,9 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
-import { usersRouter } from "routes/user";
-import { tokenChecker } from "middleware/token_checker";
-import { questionsRouter } from "routes/question";
+import { usersRouter } from "./routes/userRoute";
+import { tokenChecker } from "./middleware/token_checker";
+// import { questionsRouter } from "routes/question";
 
 const app: Application = express();
 
@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 app.use('/users', usersRouter, tokenChecker);
-app.use('/questions', tokenChecker, questionsRouter)
+// app.use('/questions', tokenChecker, questionsRouter)
 
 const listenForRequests = (): void => {
     const port : string | undefined = process.env.PORT;

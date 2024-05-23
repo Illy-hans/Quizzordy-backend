@@ -1,5 +1,5 @@
 import { User, IUser } from "../models/userModel";
-import { generateToken } from "middleware/token";
+import { generateToken } from "../middleware/token";
 import { Request, Response } from 'express';
 
 
@@ -35,9 +35,9 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 
 const UsersController = {
     create: create,
-    getAllUserInfo: getAllUserInfo, 
-    updateUserInfo: updateUserInfo,
-    saveQuiz: saveQuiz,
+    // getAllUserInfo: getAllUserInfo, 
+    // updateUserInfo: updateUserInfo,
+    // saveQuiz: saveQuiz,
 };
 
 
