@@ -41,5 +41,4 @@ const tokenChecker = (req: CustomRequest, res: Response, next: NextFunction) => 
     }
 };
 
-
 export { tokenChecker };

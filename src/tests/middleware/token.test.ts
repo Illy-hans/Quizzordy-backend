@@ -1,6 +1,6 @@
 import { generateToken, decodeToken } from "../../middleware/token";
 
-describe("TokenGenerator", () => {
+describe("Test token generation", () => {
     describe("jsonwebtoken", () => {
         test("returns a token containing user_id that is valid for 10 minutes", () => {
 

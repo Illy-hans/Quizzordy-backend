@@ -27,8 +27,5 @@ const decodeToken = (token: string) : TokenPayload => {
     return jwt.verify(token, private_key) as TokenPayload;
 };
 
-const token = generateToken('user1');
-console.log(token);
-
 export { generateToken };
 export { decodeToken };
