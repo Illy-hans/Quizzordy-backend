@@ -18,7 +18,11 @@ app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-app.use('/users', usersRouter, tokenChecker);
+const loggerMiddleware = (req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    next(); // Pass the request to the next middleware
+};
+app.use('/users', loggerMiddleware, usersRouter, tokenChecker);
 // app.use('/questions', tokenChecker, questionsRouter)
 
 const listenForRequests = (): void => {

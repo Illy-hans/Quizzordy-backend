@@ -2,18 +2,17 @@ import { User, IUser } from "../models/userModel";
 import { generateToken } from "../middleware/token";
 import { Request, Response } from 'express';
 
-
 const create = async (req: Request, res: Response): Promise<Response> => {
     const username: string = req.body.username;
     const email:  string = req.body.email;
     const password: string = req.body.password;
+    // const { username, email, password } = req.body;
 
     try {
-        // Checks if the email is already in use
         const existingUser: IUser | null = await User.findOne({ email });
     
         if (existingUser) {
-            return res.status(401).json({ message: 'Email already in use', code: 1 });
+            return res.status(401).json({ message: 'Email already in use' });
         };
 
         const newUser = new User({ username, email, password });
@@ -30,13 +29,61 @@ const create = async (req: Request, res: Response): Promise<Response> => {
     
 };
 
+interface CustomRequest extends Request {
+    user_id?: string;
+}
+const getAllUserData = async (req: CustomRequest, res: Response): Promise<Response> => {
+    let user: IUser | null = null
+
+    try {
+        const userId = req.query.user_id as string | undefined || req.user_id;
+
+        if (userId != null) {
+            user = await User.findById(userId);
+        } else {
+            user = await User.findById(req.user_id as string);
+        }
+    
+        const token = generateToken(req.user_id);
+        res.status(200).json({username: user.username, email: user.email, token: token });
+        } 
+    catch (error) {
+        console.log(error)
+        return res.status(404).json({ message: 'User not found' })
+        }
+    };
+
+
+const updateUserData = async (req: CustomRequest, res: Response): Promise<Response> => {
+
+    try {
+        const user = await User.findById(req.user_id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        };
+
+        user.username = req.body.username || user.username;
+        user.email = req.body.email || user.email;
+        user.password = req.body.password || user.password;
+
+        await user.save();
+
+        const token = generateToken(user.id)
+
+        return res.status(200).json({ message: "User updated", token });
+
+    } catch (error) {
+        return res.status(500).json({ message: 'An error occurred', error });
+    };
+};
 
 
 
 const UsersController = {
     create: create,
-    // getAllUserInfo: getAllUserInfo, 
-    // updateUserInfo: updateUserInfo,
+    getAllUserData: getAllUserData, 
+    updateUserData: updateUserData,
     // saveQuiz: saveQuiz,
 };
 
