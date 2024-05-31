@@ -7,7 +7,7 @@ import compression from 'compression';
 import cors from 'cors';
 import { usersRouter } from "./routes/userRoute";
 import { tokenChecker } from "./middleware/token_checker";
-// import { questionsRouter } from "routes/question";
+import { questionsRouter } from "./routes/questionRoute";
 
 const app: Application = express();
 
@@ -23,7 +23,7 @@ const loggerMiddleware = (req, res, next) => {
     next(); // Pass the request to the next middleware
 };
 app.use('/users', loggerMiddleware, usersRouter, tokenChecker);
-// app.use('/questions', tokenChecker, questionsRouter)
+app.use('/questions', loggerMiddleware, questionsRouter)
 
 const listenForRequests = (): void => {
     const port : string | undefined = process.env.PORT;
