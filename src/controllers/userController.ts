@@ -1,6 +1,7 @@
 import { User, IUser } from "../models/userModel";
 import { generateToken } from "../middleware/token";
 import { Request, Response } from 'express';
+import { QuizEntry } from "../models/quizModel";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
     const username: string = req.body.username;
@@ -45,7 +46,7 @@ const getAllUserData = async (req: CustomRequest, res: Response): Promise<Respon
         }
     
         const token = generateToken(req.user_id);
-        res.status(200).json({username: user.username, email: user.email, token: token });
+        res.status(200).json({username: user.username, email: user.email, token: token, quiz: user.quiz });
         } 
     catch (error) {
         console.log(error)
@@ -55,7 +56,7 @@ const getAllUserData = async (req: CustomRequest, res: Response): Promise<Respon
 
 
 const updateUserData = async (req: CustomRequest, res: Response): Promise<Response> => {
-
+    
     try {
         const user = await User.findById(req.user_id);
 
@@ -78,14 +79,46 @@ const updateUserData = async (req: CustomRequest, res: Response): Promise<Respon
     };
 };
 
+const saveQuiz = async( req: CustomRequest, res: Response): Promise<Response> => {
+
+    try {
+        const user = await User.findById(req.user_id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        };
+
+        const { score, questionArray } = req.body;
+
+        const newQuizEntry: QuizEntry = {
+            score:score,
+            questionArray: questionArray,
+            createdAt: new Date()
+        };
+
+        user.quiz.push(newQuizEntry);
+        await user.save();
+
+        const token = generateToken(req.user_id)
+        return res.status(200).json({ message: 'Quiz added to user successfully', token: token});
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+    
+};
 
 
 const UsersController = {
     create: create,
     getAllUserData: getAllUserData, 
     updateUserData: updateUserData,
-    // saveQuiz: saveQuiz,
+    saveQuiz: saveQuiz,
 };
 
 
 export { UsersController };
+
+
+

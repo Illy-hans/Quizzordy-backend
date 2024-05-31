@@ -14,7 +14,7 @@ const userSchema = new Schema<IUser>({
     username: {type: String, required: true},
     email: {type: String, required: true },
     password: { type: String, required: true },
-    quiz : quizEntrySchema,
+    quiz: { type: [quizEntrySchema], default: []}
 });
 
 userSchema.pre('save', async function (next) {

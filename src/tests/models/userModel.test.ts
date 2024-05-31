@@ -11,9 +11,9 @@ afterAll(async () => {
     await mongoose.connection.close();
 })
 describe('User Model Test', () => {
-    beforeEach(async () => {
-        await User.deleteMany({});
-    });
+    // beforeEach(async () => {
+    //     await User.deleteMany({});
+    // });
 
     it('should create and save a user successfully', async () => {
         const userData = {
