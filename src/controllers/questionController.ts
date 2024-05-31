@@ -7,11 +7,18 @@ interface CustomRequest extends Request {
     user_id?: string;
 }
 const createQuiz = async (req: CustomRequest, res: Response): Promise<Response> => {
-    
+
+    const queryCategory: string = req.body.category || null;
+
     try { 
-        const queryCategory: string = req.body.category;
-        const questions = await Question.find({ queryCategory }).limit(5);
-        
+        let questions; 
+            if ( queryCategory ) { 
+                questions = await Question.find({ queryCategory }).limit(5);
+            } else {
+                questions = await Question.aggregate([{ $sample : { size: 5}}])
+
+            }
+            
         if (req.user_id) {
             const token = generateToken(req.user_id);
             return res.status(200).json({ questions: questions, token: token });
