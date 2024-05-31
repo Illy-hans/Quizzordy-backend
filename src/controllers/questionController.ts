@@ -1,6 +1,7 @@
 import { Question } from '../models/questionModel';
 import { Request, Response } from 'express';
 // import { generateToken } from "middleware/token";
+import axios from 'axios';
 
 interface CustomRequest extends Request {
     user_id?: string;
