@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { QuestionController } from "controllers/questionController";
 
-const router = Router();
+const router: Router = Router();
 
 router.get("/", QuestionController.createQuiz);
 
