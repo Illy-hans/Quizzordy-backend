@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
 require('dotenv').config();
 
-const mongoDbUrl: string = process.env.MONGODB_URL;
-
 const connectToDatabase = async () : Promise<void> => {
+    const mongoDbUrl: string = process.env.MONGODB_URL;
 
     if (!mongoDbUrl) {
         console.error("No MongoDB url provided.");
@@ -11,6 +10,7 @@ const connectToDatabase = async () : Promise<void> => {
     }
 
     try { 
+        console.log(mongoDbUrl)
         await mongoose.connect(mongoDbUrl);
         console.log("Successfully connected to MongoDB");
         
@@ -20,7 +20,7 @@ const connectToDatabase = async () : Promise<void> => {
         }
     };
 
-    
+
 const closeDatabaseConnection = async () : Promise<void> => {
 
     try {

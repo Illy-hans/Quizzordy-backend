@@ -4,12 +4,12 @@
     "esModuleInterop": true,
     "target": "es6",
     "moduleResolution": "node",
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "allowJs": true
 },
 "lib": ["es2015"],
-"include": ["src/**/*.ts", "tests/**/*.ts"],
+"include": ["./src/**/*.ts"],
 "exclude": ["node_modules"]
 }

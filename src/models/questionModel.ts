@@ -12,7 +12,7 @@ const questionSchema = new Schema<Question>({
     category: {type: String, required: true},
     correct_answer: {type: String, required: true},
     incorrect_answers: {type: [String], required: true},
-}, { _id: true } );
+});
 
 const Question = model<Question>('Question', questionSchema)
 
