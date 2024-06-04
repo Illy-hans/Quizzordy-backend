@@ -44,7 +44,7 @@ const runScript = async (): Promise<void> => {
 
 runScript();
 
-// List of categories with corresponding IDs:
+// List of categories with corresponding IDs in project:
 
 // "id": 9,
 // "name": "General Knowledge"
