@@ -6,7 +6,7 @@ const router: Router = Router();
 
 router.post("/", UsersController.create);
 router.get("/", tokenChecker, UsersController.getAllUserData);
-router.patch("/",tokenChecker, UsersController.updateUserData);
-router.patch("/addquiz", tokenChecker, UsersController.saveQuiz);
+router.patch("/:id",tokenChecker, UsersController.updateUserData, UsersController.saveQuiz);
+router.patch("/:id/addquiz", tokenChecker, UsersController.saveQuiz);
 
 export { router as usersRouter };

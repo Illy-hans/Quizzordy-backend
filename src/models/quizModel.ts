@@ -1,16 +1,18 @@
-import { ObjectId, Schema } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
 interface QuizEntry {
     score: Number;
-    questionArray: ObjectId[];
+    questionArray: mongoose.Types.ObjectId[];
     createdAt: Date;
 }
 
 const quizEntrySchema = new Schema<QuizEntry>({
-    score: { type: Number, required: true },
-    questionArray: [{ type: Schema.Types.ObjectId, ref: "Question" }],
+    score: { type: Number, required: true, default: 0 },
+    questionArray: [{ type: mongoose.Types.ObjectId, ref: "Question" }],
     createdAt: { type: Date, default : Date.now, required: true }
 });
 
+const quiz = model<QuizEntry>('Quiz', quizEntrySchema)
+
 export { quizEntrySchema }; 
-export { QuizEntry }; 
+export { QuizEntry, quiz }; 

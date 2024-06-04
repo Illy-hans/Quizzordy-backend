@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const connectToDatabase = async () : Promise<void> => {
     const mongoDbUrl: string = process.env.MONGODB_URL;
-
+    
     if (!mongoDbUrl) {
         console.error("No MongoDB url provided.");
         throw new Error("No connection string provided");

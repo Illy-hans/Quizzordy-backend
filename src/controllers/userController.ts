@@ -47,7 +47,7 @@ const getAllUserData = async (req: CustomRequest, res: Response): Promise<Respon
         } 
     catch (error) {
         console.log(error)
-        return res.status(404).json({ message: 'User not found' })
+        return res.status(401).json({ message: 'User not found' })
         }
     };
 
@@ -97,7 +97,7 @@ const saveQuiz = async( req: CustomRequest, res: Response): Promise<Response> =>
         await user.save();
 
         const token = generateToken(req.user_id)
-        return res.status(200).json({ message: 'Quiz added to user successfully', token: token});
+        return res.status(201).json({ message: 'Quiz added to user successfully', token: token});
 
     } catch (error) {
         console.error(error);

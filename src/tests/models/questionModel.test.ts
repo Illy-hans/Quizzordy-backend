@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 describe('Question model test', () => {
     let createdQuestion: mongoose.Document<any> & Question;
 
-    // Deletes test case 
     afterEach(async () => {
         if (createdQuestion) {
                 await createdQuestion.deleteOne();

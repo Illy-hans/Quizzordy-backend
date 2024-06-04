@@ -26,8 +26,8 @@ describe("/questions", () => {
         questions.forEach((question: Partial<Question>) => {
             expect(question).toMatchObject(sampleQuestion);
         });
-    })
-    })
+    });
+    });
     
     describe("Quiz creation with a specific category", () => { 
         const category: string = "History";
@@ -44,6 +44,6 @@ describe("/questions", () => {
         questions.forEach((question:any) => {
             expect(question.category).toBe(category)
         });
-        })
-    })
+        });
+    });
 });
