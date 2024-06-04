@@ -1,6 +1,6 @@
 ## Quizzordy: A Typescript & Node quiz app api
 
-Welcome to Quizzordy(definitely not named after my favourite quiz show). The back-end api server is built and the front-end is in development. 
+Welcome to Quizzordy(definitely not named after my favourite quiz show). The back-end api server can be accessed here and the front-end is in development. 
 
 ### Tech Stack 
 - Typescript 
