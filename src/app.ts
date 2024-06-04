@@ -40,3 +40,5 @@ connectToDatabase().then(() => {
     listenForRequests();
 });
 
+
+export default app;

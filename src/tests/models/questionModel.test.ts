@@ -1,7 +1,6 @@
-import { expect, it, beforeAll, afterAll } from '@jest/globals';
+import { expect, it } from '@jest/globals';
 import { Question } from '../../models/questionModel';
 import mongoose from 'mongoose';
-import { connectToDatabase } from '../../config/db_connection';
 
 describe('Question model test', () => {
     let createdQuestion: mongoose.Document<any> & Question;

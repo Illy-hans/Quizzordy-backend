@@ -2,14 +2,12 @@ import { expect, it } from '@jest/globals';
 import { User, IUser } from '../../models/userModel';
 import mongoose from 'mongoose';
 
-
 describe('User Model Test', () => {
     let createdUser: mongoose.Document<any> & IUser;
 
     afterEach(async () => {
         if (createdUser) {
                 await createdUser.deleteOne();
-                createdUser = null;
             }
     });
 
@@ -27,7 +25,6 @@ describe('User Model Test', () => {
         expect(savedUser._id).toBeDefined();
         expect(savedUser.username).toBe(userData.username);
         expect(savedUser.email).toBe(userData.email);
-        // expect(savedUser.password).toBe(userData.password);
         });
 
     it('should fail to create user without required field', async () => {
