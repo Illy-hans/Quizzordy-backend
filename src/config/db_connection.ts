@@ -10,6 +10,7 @@ const connectToDatabase = async () : Promise<void> => {
     }
 
     try { 
+
         await mongoose.connect(mongoDbUrl);
         console.log("Successfully connected to MongoDB");
         

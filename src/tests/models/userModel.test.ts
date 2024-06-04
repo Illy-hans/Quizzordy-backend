@@ -1,19 +1,17 @@
-import { expect, it, beforeAll, afterAll } from '@jest/globals';
-import { User } from '../../models/userModel';
+import { expect, it } from '@jest/globals';
+import { User, IUser } from '../../models/userModel';
 import mongoose from 'mongoose';
-import { connectToDatabase } from '../../config/db_connection';
 
-beforeAll(async () => {
-    await connectToDatabase();
-});
 
-afterAll(async () => {
-    await mongoose.connection.close();
-})
 describe('User Model Test', () => {
-    // beforeEach(async () => {
-    //     await User.deleteMany({});
-    // });
+    let createdUser: mongoose.Document<any> & IUser;
+
+    afterEach(async () => {
+        if (createdUser) {
+                await createdUser.deleteOne();
+                createdUser = null;
+            }
+    });
 
     it('should create and save a user successfully', async () => {
         const userData = {
@@ -24,6 +22,7 @@ describe('User Model Test', () => {
 
         const validUser = new User(userData);
         const savedUser = await validUser.save();
+        createdUser = savedUser;
 
         expect(savedUser._id).toBeDefined();
         expect(savedUser.username).toBe(userData.username);

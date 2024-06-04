@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { connectToDatabase } from "./config/db_connection";
+import { connectToDatabase } from "./db_connection";
 
 beforeAll(async () => {
     await connectToDatabase();

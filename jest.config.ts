@@ -1,9 +1,13 @@
-import type { JestConfigWithTsJest } from 'ts-jest'
+import type { Config } from '@jest/types';
 
-const jestConfig: JestConfigWithTsJest = {
+
+const config: Config.InitialOptions =  {
     testEnvironment: 'node',
     preset: 'ts-jest',
-    }
+    verbose: true,
+    setupFilesAfterEnv: ['./src/config/setupTests.ts'],
+    testTimeout: 12000,
+    };
 
-export default jestConfig
+export default config;
 

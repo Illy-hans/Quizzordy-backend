@@ -4,10 +4,7 @@ import { Request, Response } from 'express';
 import { QuizEntry } from "../models/quizModel";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
-    const username: string = req.body.username;
-    const email:  string = req.body.email;
-    const password: string = req.body.password;
-    // const { username, email, password } = req.body;
+    const { username, email, password } = req.body;
 
     try {
         const existingUser: IUser | null = await User.findOne({ email });
