@@ -9,8 +9,8 @@
 
 >[!CAUTION]
 The category must be listed as its ID number.
-Some categories will not the number of questions needed. 
+Some categories will not have the number of questions needed. 
 
 > [!NOTE]
-> Code is solely for seeding
-> Run code as intended
+Code is solely for seeding
+Run code as intended
