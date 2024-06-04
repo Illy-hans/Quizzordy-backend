@@ -17,13 +17,13 @@ describe("/users", () => {
         it("should create a user", async () => {
         const response = await request(app)
             .post("/users")
-            .send({ username: "Kora1", email: "scarconstt1@email.com", password: "1234" });
+            .send({ username: "newUser", email: "newUser@email.com", password: "1234" });
 
         expect(response.statusCode).toBe(201);
 
-        newUser = await User.findOne({ username: "Kora"});
-        expect(newUser.email).toEqual("scarconstt@email.com");
-        expect(newUser.username).toEqual("Kora");
+        newUser = await User.findOne({ username: "newUser"});
+        expect(newUser.email).toEqual("newUser@email.com");
+        expect(newUser.username).toEqual("newUser");
         });
     });
 
@@ -33,10 +33,8 @@ describe("/users", () => {
             .post("/users")
             .send({ username: "Kora", email: "scarconstt@email.com", password: "1234" });
 
-        console.log(response)
         expect(response.statusCode).toBe(401);
         expect(response.text).toContain("Email already in use")
         })
-
     })
 });
