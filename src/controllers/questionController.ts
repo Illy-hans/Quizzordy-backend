@@ -34,33 +34,6 @@ const createQuiz = async (req: CustomRequest, res: Response): Promise<Response> 
     }
 };
 
-// const getQuestions = async (req: Request, res: Response): Promise<Response> => {
-
-//     const options = {
-//         method: 'GET', 
-//         url: 'https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple',
-//     };
-
-//     try {
-//         const response = await axios.request(options);
-//         console.log("Data received:", response.data);
-//         return res.status(200).json(response.data); 
-
-//     } catch (error) {
-//         if (error.response) {
-//             console.error(`HTTP error: ${error.response.status}`);
-//             return res.status(error.response.status).json({ error: `HTTP error: ${error.response.status}` });
-//         } else if (error.request) {
-//             console.error("Request error: No response received");
-//             return res.status(500).json({ error: "Request error: No response received" });
-//         } else {
-//             console.error("Error:", error.message);
-//             return res.status(500).json({ error: error.message });
-//         }
-//     }
-// };
-
-
 const QuestionController = {
     createQuiz: createQuiz,
 };
