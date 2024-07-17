@@ -8,9 +8,7 @@ describe("/users", () => {
     let newUser: mongoose.Document<any> & IUser;
 
     afterEach(async () => {
-        if (newUser ) {
-            await newUser.deleteOne();
-        }
+        await newUser.deleteOne();
     });
     
     describe("POST, when username, email and password are provided", () => {
@@ -18,7 +16,8 @@ describe("/users", () => {
         const response = await request(app)
             .post("/users")
             .send({ username: "newUser", email: "newUser@email.com", password: "1234" });
-
+        
+        console.log(response.body)
         expect(response.statusCode).toBe(201);
 
         newUser = await User.findOne({ username: "newUser"});

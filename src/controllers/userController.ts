@@ -2,6 +2,7 @@ import { User, IUser } from "../models/userModel";
 import { generateToken } from "../middleware/token";
 import { Request, Response } from 'express';
 import { QuizEntry } from "../models/quizModel";
+import bcrypt from 'bcrypt';
 
 const create = async (req: Request, res: Response): Promise<Response> => {
     const { username, email, password } = req.body;
@@ -26,6 +27,31 @@ const create = async (req: Request, res: Response): Promise<Response> => {
         };
     
 };
+
+const authenticate = async (req: Request, res: Response): Promise<Response> => {
+    const { email, password } = req.body;
+
+    try {
+        const existingUser = await User.findOne({ email: email });
+
+        if (!existingUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        const token = generateToken(existingUser.id);
+        return res.status(200).json({ message: "Authentication successful", token });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({ message: "Authentication failed" });
+    }
+};
+
 
 interface CustomRequest extends Request {
     user_id?: string;
@@ -109,6 +135,7 @@ const saveQuiz = async( req: CustomRequest, res: Response): Promise<Response> =>
 
 const UsersController = {
     create: create,
+    authenticate: authenticate,
     getAllUserData: getAllUserData, 
     updateUserData: updateUserData,
     saveQuiz: saveQuiz,

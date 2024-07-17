@@ -3,7 +3,7 @@ import { QuizEntry } from './quizModel';
 import { quizEntrySchema } from './quizModel';
 import bcrypt from 'bcrypt';
 
-interface IUser {
+interface IUser extends Document {
     username: string;
     email: string;
     password: string;
