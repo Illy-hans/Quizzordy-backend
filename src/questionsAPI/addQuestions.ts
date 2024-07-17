@@ -1,18 +1,17 @@
 import { Question } from '../models/questionModel';
 import { connectToDatabase, closeDatabaseConnection } from '../config/db_connection';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import he from 'he';
 
-const addQuestions = async (categories: string[]): Promise<void> => {
+const addQuestions = async (category: string): Promise<void> => {
 
-    for (const category of categories) {
         const options = {
             method: 'GET',
             url: `https://opentdb.com/api.php?amount=20&category=${category}&difficulty=easy&type=multiple`,
         };
 
         try {
-            const response = await axios.request(options);
+            const response: AxiosResponse = await axios.request(options);
             console.log(response.data.response_code)
             const questions = response.data.results.map((q: any) => ({
                 question: he.decode(q.question),
@@ -26,14 +25,14 @@ const addQuestions = async (categories: string[]): Promise<void> => {
         } catch (error) {
             console.error(`Error fetching questions for category ${category}:`, error.message);
         }
-    }
 };
+
 
 const runScript = async (): Promise<void> => {
     try {
         await connectToDatabase();
-        const categories = ['27'] 
-        await addQuestions(categories);
+        const category = '27'; 
+        await addQuestions(category);
 
     } catch (error) {
         console.error("Error during database operations:", error);
