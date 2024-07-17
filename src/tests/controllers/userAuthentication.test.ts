@@ -31,10 +31,10 @@ describe("User authentication tests- /users/authenticate", () => {
                     password: "12345678"
                 });
             
-            console.log(response.body)
             expect(response.status).toBe(200);
             expect(response.body).toHaveProperty('message', 'Authentication successful');
             expect(response.body).toHaveProperty('token');
+            expect(response.body).toHaveProperty('username', 'Test user')
         });
 
         it("should return 404 when user is not found", async () => {

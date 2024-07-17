@@ -44,7 +44,7 @@ const authenticate = async (req: Request, res: Response): Promise<Response> => {
         }
 
         const token = generateToken(existingUser.id);
-        return res.status(200).json({ message: "Authentication successful", token });
+        return res.status(200).json({ message: "Authentication successful", token: token, username: existingUser.username});
 
     } catch (error) {
         console.error(error);
