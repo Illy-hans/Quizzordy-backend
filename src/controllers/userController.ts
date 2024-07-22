@@ -44,7 +44,7 @@ const authenticate = async (req: Request, res: Response): Promise<Response> => {
         }
 
         const token = generateToken(existingUser.id);
-        return res.status(200).json({ message: "Authentication successful", token: token, username: existingUser.username});
+        return res.status(200).json({ message: "Authentication successful", token: token, username: existingUser.username, user_id: existingUser._id});
 
     } catch (error) {
         console.error(error);
@@ -95,12 +95,13 @@ const updateUserData = async (req: CustomRequest, res: Response): Promise<Respon
 
         const token = generateToken(user.id)
 
-        return res.status(200).json({ message: "User updated", token });
+        return res.status(200).json({ message: "User updated", token: token });
 
     } catch (error) {
-        return res.status(500).json({ message: 'An error occurred', error });
+        return res.status(500).json({ message: 'An error occurred', error: error });
     };
 };
+
 
 const saveQuiz = async( req: CustomRequest, res: Response): Promise<Response> => {
 
