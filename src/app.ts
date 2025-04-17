@@ -11,35 +11,22 @@ import { questionsRouter } from "./routes/questionRoute";
 
 const app: Application = express();
 
-app.use(cors({
-    credentials: true,
-}));
+app.use(cors({ credentials: true }));
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-// for development
 const loggerMiddleware = (req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next(); 
 };
 app.use('/users', loggerMiddleware, usersRouter, tokenChecker);
-app.use('/questions', loggerMiddleware, questionsRouter)
+app.use('/questions', loggerMiddleware, questionsRouter);
 
-const listenForRequests = (): void => {
-    const port : string | undefined = process.env.PORT;
-
-    if (!port) {
-        throw new Error('PORT environment variable is not set');
-    }
-    app.listen(parseInt(port), () => {
-        console.log("Now listening on port", port);
-    });
-};
-
-connectToDatabase().then(() => {
-    listenForRequests();
+// No app.listen()!
+// Instead, ensure DB is connected when app is loaded
+connectToDatabase().catch((err) => {
+    console.error("Database connection failed:", err);
 });
-
 
 export default app;
