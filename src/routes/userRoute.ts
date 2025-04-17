@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { tokenChecker } from "../middleware/token_checker";
 import { UsersController } from "../controllers/userController";
-import { AuthenticationController } from "src/controllers/authenticationController";
+import { AuthenticationController } from "../controllers/authenticationController";
 
 const router: Router = Router();
 
